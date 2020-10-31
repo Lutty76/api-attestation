@@ -1,3 +1,3 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+app_default_qr:
+    path: /qr
+    controller: App\Controller\DefaultController::qr
