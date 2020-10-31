@@ -43,18 +43,20 @@ class DefaultController extends AbstractController
             ));*/
           
             $data=[
-                'creation_date' => "2020-01-31",
-                'creation_heures' => "15",
-                'creation_minutes' => "20",
+                'creation_date' => "31/10/2020",
+                'creation_heures' => "18",
+                'creation_minutes' => "38",
                 'nom' => "Germond",
                 'prenom' => "Jonathan",
-                'naissance_date' => "01-01-1970",
+                'naissance_date' => "01/01/1970",
                 'naissance_lieu' => "Soupe primordiale",
                 'adresse' => "22 rue du cherche midi, Île de Phatt",
-                'fait_date' => "2020-01-31",
+                'zipcode' => "75900",
+                'ville' => "Somewhere",
+                'fait_date' => "31/10/2020",
                 'fait_heures' => "15",
-                'fait_minutes' => "22",
-                'fait_lieu' => "Mon ul",
+                'fait_minutes' => "00",
+                'fait_lieu' => "Somewhere",
                 'motif_travail' => "1",
                 'motif_sante' => "1",
                 'motif_famille' => "1",
@@ -64,9 +66,8 @@ class DefaultController extends AbstractController
                 'motif_missions' => "1",
                 'motif_enfants' => "1",
                 'motif_courses' => "1",
-                'motifs_join' => "Parce que !"
+                'motifs_join' => "achats"
             ];
-
            // $mpdf->WriteHTML($this->renderView('attestation_page2.svg.twig',['qrcode' => ]));
            $pdfGenerator->generatePDF($data)->Output();
             

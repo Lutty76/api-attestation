@@ -40,7 +40,7 @@ class PDFGenerator
         $pdf->Text(45, 54.5, utf8_decode($data["prenom"]." ".$data["nom"]));
         $pdf->Text(45, 61.5, $data["naissance_date"]);
         $pdf->Text(105, 61.5, utf8_decode($data["naissance_lieu"]));
-        $pdf->Text(49, 69.2, utf8_decode($data["adresse"]));
+        $pdf->Text(49, 69.2, utf8_decode($data["adresse"]." ".$data["zipcode"]." ".$data["ville"]));
 
         if ($data["motif_travail"] == "1")   {   $pdf->Text(31.4, 93.9, 'X');   }
         if ($data["motif_courses"] == "1")   {   $pdf->Text(31.4, 109, 'X');   }
@@ -58,7 +58,7 @@ class PDFGenerator
 
         $pdf->Image($qrcode, 150, 220, 35, 35, 'png');
         $pdf->AddPage();
-        $pdf->Image($qrcode, 10, 10, 100, 100, 'png');
+        $pdf->Image($qrcode, 15, 15, 115, 115, 'png');
         return $pdf;
     }
 }

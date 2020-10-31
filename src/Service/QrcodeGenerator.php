@@ -2,6 +2,7 @@
 namespace App\Service;
 
 use Endroid\QrCode\QrCode;
+use Endroid\QrCode\ErrorCorrectionLevel;
 use Twig\Environment;
 
 
@@ -20,6 +21,9 @@ class QrcodeGenerator
 
         $qrCodeContents = $this->twig->render('qr.txt.twig', $data);
         $qrCode = new QrCode($qrCodeContents);
+        $qrCode->setSize(600);
+        $qrCode->setMargin(1); 
+        $qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::MEDIUM());
 
         header('Content-Type: '.$qrCode->getContentType());
         return $qrCode->writeDataUri();
