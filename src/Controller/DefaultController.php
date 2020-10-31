@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use App\Service\QrcodeGenerator;
 
 class DefaultController extends AbstractController
 {
@@ -31,5 +32,10 @@ class DefaultController extends AbstractController
             'fait_minutes' => "22",
             'motifs_join' => "Parce que !"
         ]);
+    }
+
+    public function qrcode(QrcodeGenerator $qrcodeGenerator): Response
+    {
+        return new Response("<img src=\"".$qrcodeGenerator->generateQrCode()->writeDataUri()."\" >");
     }
 }

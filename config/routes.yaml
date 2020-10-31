@@ -1,3 +1,6 @@
 app_default_qr:
     path: /qr
     controller: App\Controller\DefaultController::qr
+app_default_qrcode:
+    path: /qrcode
+    controller: App\Controller\DefaultController::qrcode
