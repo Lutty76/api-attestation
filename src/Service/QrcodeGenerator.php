@@ -3,6 +3,7 @@ namespace App\Service;
 
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\ErrorCorrectionLevel;
+use App\DTO\Attestation;
 use Twig\Environment;
 
 
@@ -17,9 +18,9 @@ class QrcodeGenerator
     }
 
 
-    public function generateQrCode($data){
+    public function generateQrCode(Attestation $attestation){
 
-        $qrCodeContents = $this->twig->render('qr.txt.twig', $data);
+        $qrCodeContents = $this->twig->render('qr.txt.twig', array( "attestation" => $attestation ));
         $qrCode = new QrCode($qrCodeContents);
         $qrCode->setSize(600);
         $qrCode->setMargin(1); 

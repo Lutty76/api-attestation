@@ -3,8 +3,11 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use App\Service\QrcodeGenerator;
 use App\Service\PDFGenerator;
+use App\DTO\Attestation;
 
 class DefaultController extends AbstractController
 {
@@ -35,41 +38,18 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function qrcode(PDFGenerator $pdfGenerator): Response
+    public function qrcode(PDFGenerator $pdfGenerator, SerializerInterface $serializer): Response
     {
         
 
           /*return new Response($this->renderView('attestation_page1.svg.twig',
             ));*/
-          
-            $data=[
-                'creation_date' => "31/10/2020",
-                'creation_heures' => "18",
-                'creation_minutes' => "38",
-                'nom' => "Germond",
-                'prenom' => "Jonathan",
-                'naissance_date' => "01/01/1970",
-                'naissance_lieu' => "Soupe primordiale",
-                'adresse' => "22 rue du cherche midi, Île de Phatt",
-                'zipcode' => "75900",
-                'ville' => "Somewhere",
-                'fait_date' => "31/10/2020",
-                'fait_heures' => "15",
-                'fait_minutes' => "00",
-                'fait_lieu' => "Somewhere",
-                'motif_travail' => "1",
-                'motif_sante' => "1",
-                'motif_famille' => "1",
-                'motif_handicap' => "1",
-                'motif_sport' => "1",
-                'motif_judiciaire' => "1",
-                'motif_missions' => "1",
-                'motif_enfants' => "1",
-                'motif_courses' => "1",
-                'motifs_join' => "achats"
-            ];
+            $jsonAttestation = '{"creationDate":"31\/10\/2020","creationHeure":"18","creationMinute":"38","nom":"Germond","prenom":"Jonathan","dateNaissance":"01\/01\/1970","lieuNaissance":"Soupe primordiale","adresse":"22 rue du cherche midi, \u00cele de Phatt","codePostal":"75900","ville":"Somewhere","sortieDate":"31\/10\/2020","sortieHeure":"15","sortieMinute":"00","motifTravail":true,"motifCourse":true,"motifSante":true,"motifFamille":true,"motifHandicap":true,"motifSport":true,"motifJudiciaire":false,"motifMissions":true,"motifEnfants":true}';
+ 
+
+            $attestation = $serializer->deserialize($jsonAttestation, 'App\DTO\Attestation', 'json');
            // $mpdf->WriteHTML($this->renderView('attestation_page2.svg.twig',['qrcode' => ]));
-           $pdfGenerator->generatePDF($data)->Output();
+           $pdfGenerator->generatePDF($attestation)->Output();
             
 
           
